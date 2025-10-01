@@ -192,3 +192,62 @@ body {
 .filtros button:hover {
     background-color: #001533;
 }
+
+.resumo-vendas table {
+  width: 100%;
+  border-collapse: collapse;
+margin-top: 20px;
+}
+
+.resumo-vendas table th, .resumo-vendas th, .resumo-vendas td{
+  border: 1px solid #ddd;
+
+}
+
+.resumo-vendas th, .resumo-vendas td{
+  padding: 8px;
+  text-align: left;
+}
+
+.resumo-vendas th{
+  background-color: #f2f2f2;
+
+}
+
+.detalhes-vendedor{
+  padding: 20px;
+}
+
+.detalhes-vendedor table{
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.detalhes-vendedor table, .detalhes-vendedor th, .detalhes-vendedor td{
+  border: 1px solid #ddd;
+
+}
+
+.detalhes-vendedor th, .detalhes-vendedor td{
+  padding: 8px;
+  text-align: left;
+}
+
+.detalhes-vendedor th{
+  background-color: #f2f2f2;
+}
+
+.detalhes-vendedor button{
+  background-color: #002147;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.detalhes-vendedor button:hover{
+  background-color: #001F3F;
+}
