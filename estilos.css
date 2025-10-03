@@ -33,10 +33,7 @@ body {
 
 .barra-lateral ul li {
   margin: 20px 0;
-  cursor: pointer;
-  padding: 10px;
-  border-radius: 5px;
-  transition: background-color 0.3s;
+
 }
 
 .barra-lateral ul li a {
@@ -69,9 +66,9 @@ body {
 }
 
 .vendedor img {
+  border-radius: 50%;
   width: 100px;
   height: 100px;
-  border-radius: 50%;
 }
 
 .vendedor .podio {
@@ -86,8 +83,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   margin-top: 20px;
   position: relative;
 }
@@ -105,12 +102,15 @@ body {
 
 .position-1 {
   background-color: #ff6347;
+  height: 200px;
 }
 .position-2 {
   background-color: #ffd700;
+  height: 175px;
 }
 .position-3 {
   background-color: #32cd32;
+  height: 150px;
 }
 .ranking-vendedores {
   display: flex;
@@ -122,6 +122,7 @@ body {
 .ranking-vendedores .item-ranking {
   display: flex;
   background-color: white;
+  align-items: center;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 10px;
@@ -199,7 +200,7 @@ body {
 margin-top: 20px;
 }
 
-.resumo-vendas table th, .resumo-vendas th, .resumo-vendas td{
+.resumo-vendas table , .resumo-vendas th, .resumo-vendas td{
   border: 1px solid #ddd;
 
 }
