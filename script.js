@@ -176,16 +176,68 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-  document.getElementById("voltar-ranking").addEventListener("click", function () {
+  document
+    .getElementById("voltar-ranking")
+    .addEventListener("click", function () {
+      document.getElementById(
+        "titulo-principal"
+      ).innerText = `Rankind de Vendas`;
 
-     document.getElementById(
-       "titulo-principal"
-     ).innerText = `Rankind de Vendas`;
+      document.getElementById("top-3-vendedores").style.display = "none";
+      document.getElementById("ranking-vendedores").style.display = "block";
+      document.getElementById("resumo-vendas").style.display = "none";
+      document.getElementById("detalhes-vendedor").style.display = "none";
+    });
 
-     document.getElementById("top-3-vendedores").style.display = "none";
-     document.getElementById("ranking-vendedores").style.display = "block";
-     document.getElementById("resumo-vendas").style.display = "none";
-     document.getElementById("detalhes-vendedor").style.display = "none";
+  document.querySelectorAll('.filtros input').forEach(input => {
 
-  });
+    input.addEventListener('input', filtrarTabelaResumo);
+  })
+
+  function filtrarTabelaResumo() {
+    const filtroVendedor = document.getElementById('filtro-vendedor').value.toLowerCase();
+    const filtroProduto = document.getElementById('filtro-produto').value.toLowerCase();
+    const filtroTotal = document.getElementById('filtro-total').value.toLowerCase();
+    const linhas = document.querySelectorAll('#tabela-resumo tbody tr');
+
+    linhas.forEach(linha => {
+
+      const vendedor = linha.children[0].textContent.toLowerCase();
+      const produto = linha.children[1].textContent.toLowerCase();
+      const total = linha.children[2].textContent.toLowerCase();
+
+      const correspondeVendedor = vendedor.includes(filtroVendedor);
+      const correspondeProduto = produto.includes(filtroProduto);
+      const correspondeTotal = total.includes(filtroTotal);
+
+      if (correspondeVendedor && correspondeProduto && correspondeTotal) {
+        linha.style.display = '';
+      }else {
+        linha.style.display = 'none';
+      }
+    })
+  }
+   document
+     .getElementById("exportar-resumo")
+     .addEventListener("click", function () {
+       exportarTabelaParaExcel("tabela-resumo", "resumo_vendas.xlsx");
+     });
+
+  document
+    .getElementById("exportar-detalhes")
+    .addEventListener("click", function () {
+      exportarTabelaParaExcel("tabela-detalhes", "detalhes_vendas.xlsx");
+    });
+
+
+  function exportarTabelaParaExcel(tabelaId, nomeArquivo) {
+    const tabela = document.getElementById(tabelaId);
+    const linhas = Array.from(tabela.querySelectorAll('tr'));
+
+    const tabelaClone = tabela.cloneNode(true);
+    const linhasClone = Array.from(tabelaClone.querySelectorAll('tr'));
+    const workbook = XLSX.utils.table_to_book(tabelaClone, { sheet: "Sheet1" });
+
+    XLSX.writeFile(workbook, nomeArquivo);
+  };
 });
