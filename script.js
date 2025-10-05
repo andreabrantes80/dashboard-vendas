@@ -63,7 +63,9 @@ document.addEventListener("DOMContentLoaded", function () {
         .map(
           (vendedor, index) => `
             <div class="item-ranking" data-vendedor="${vendedor.vendedor}">
-            <img src="images/${vendedor.vendedor}.jpg" alt="${vendedor.vendedor}">
+            <img src="images/${vendedor.vendedor}.jpg" alt="${
+            vendedor.vendedor
+          }">
             <div class="info">
                 <p>${index + 1} - ${vendedor.vendedor}</p>
                  <p> ${vendedor.total.toLocaleString("pt-BR", {
@@ -135,4 +137,55 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("resumo-vendas").style.display = "block";
       document.getElementById("detalhes-vendedor").style.display = "none";
     });
+
+  document
+    .querySelector("#ranking-vendedores")
+    .addEventListener("click", function (e) {
+      const item = e.target.closest(".item-ranking");
+
+      if (item) {
+        const vendedorNome = item.getAttribute("data-vendedor");
+
+        const detalhesVendedor = dadosVendedores.filter(
+          (venda) => venda.Vendedor === vendedorNome
+        );
+
+        const tabelaDetalhes = document.querySelector("#tabela-detalhes tbody");
+
+        tabelaDetalhes.innerHTML = detalhesVendedor
+          .map(
+            (venda) => `
+        <tr>
+          <td>${venda.Vendedor}</td>
+          <td>${venda.Produto}</td>
+          <td>${parseFloat(venda.Total).toFixed(2)}</td>
+        </tr>
+
+        `
+          )
+          .join("");
+
+        document.getElementById(
+          "titulo-principal"
+        ).innerText = `Detalhes de Vendas - ${vendedorNome}`;
+
+        document.getElementById("top-3-vendedores").style.display = "none";
+        document.getElementById("ranking-vendedores").style.display = "none";
+        document.getElementById("resumo-vendas").style.display = "none";
+        document.getElementById("detalhes-vendedor").style.display = "block";
+      }
+    });
+
+  document.getElementById("voltar-ranking").addEventListener("click", function () {
+
+     document.getElementById(
+       "titulo-principal"
+     ).innerText = `Rankind de Vendas`;
+
+     document.getElementById("top-3-vendedores").style.display = "none";
+     document.getElementById("ranking-vendedores").style.display = "block";
+     document.getElementById("resumo-vendas").style.display = "none";
+     document.getElementById("detalhes-vendedor").style.display = "none";
+
+  });
 });
